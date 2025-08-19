@@ -1,0 +1,44 @@
+{
+    "name": "fooino/skeleton",
+    "description": "The fooino skeleton package with tools and functionalities.",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Sajad Sholi",
+            "email": "sajadsholi@outlook.com",
+            "role": "owner"
+        }
+    ],
+    "require": {
+        "fooino/core": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fooino\\Skeleton\\": "src/",
+            "Fooino\\Skeleton\\Database\\": "database/",
+            "Fooino\\Skeleton\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fooino\\Skeleton\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fooino\\Skeleton\\Providers\\SkeletonServiceProvider"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:fooino/core.git"
+        }
+    ]
+}

@@ -10,7 +10,7 @@ class TestCase extends TestbenchTestCase
     {
         parent::setUp();
 
-        // Config::set(['core_package_env' => 'testing']);
+        // Config::set(['skeleton_package_env' => 'testing']);
     }
 
     protected function getPackageProviders($app)

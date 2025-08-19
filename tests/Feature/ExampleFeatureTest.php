@@ -6,7 +6,7 @@ use Fooino\Skeleton\Tests\TestCase;
 
 class ExampleFeatureTest extends TestCase
 {
-    public function test_example_unit()
+    public function test_example_feature()
     {
         $this->assertTrue(true);
     }

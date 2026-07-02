@@ -1,124 +1,219 @@
-<h1>
-Skeleton kit for laravel package development
-</h1>
-<h3>
-foo is your owner name(account name)
-</br>
-bar is your repository name
-</br>
-your package address will be foo/bar
-</h3>
+# Fooino skeleton package
 
-<h4>1- composer.json</h4>
-<ol>
-<li>Replace All fooino with foo</li>
-<li>Relpace All Fooino with Foo</li>
-<li>Replace All skeleton with bar</li>
-<li>Replace All Skelton with Bar</li>
-<li>The default license type is proprietary. If you change it to MIT, change the content of LICENSE.md as well</li>
-<li>Change the authors</li>
-<li>I added a private package(fooino/core) to the require section. If you do not have any dependancy, remove the require and repositories sections</li>
-<li>For <a href="https://laravelpackage.com/02-development-environment/" target="_blank">laravel package development</a> you will need the orchestra/testbench package</li>
-</ol>
+## ⬇️ Installation
 
-<h3>Your composer json will be:</h3>
+You can install the package
 
-```json
-{
-    "name": "foo/bar",
-    "description": "The foo bar package with tools and functionalities.",
-    "type": "library",
-    "license": "proprietary",
-    "authors": [
-        {
-            "name": "Your Name",
-            "email": "yourname@mail.com",
-            "role": "owner"
-        }
-    ],
-    "require-dev": {
-        "orchestra/testbench": "^10.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Foo\\Bar\\": "src/",
-            "Foo\\Bar\\Database\\": "database/",
-            "Foo\\Bar\\Database\\Factories\\": "database/factories/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Foo\\Bar\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Foo\\Bar\\Providers\\BarServiceProvider"
-            ]
-        }
-    }
-}
+
+1. With composer:
+
+```bash
+composer require fooino/skeleton
 ```
 
-<h4>2- LICENSE.md</h4>
-<ol>
-<li>Remove or Replace my name(Sajad Sholi)</li>
-<li>Remove or Replace my website(fooino.com)</li>
-<li>Remove or Replace my mail(sajadsholi@outlook.com)</li>
-<li>If you prefer the <a href="https://choosealicense.com/licenses/mit/" target="_blank">MIT</a> license use below content</li>
-</ol>
+2. With Docker(for running and modify the package)
+```bash
+mkdir fooino && cd fooino && mkdir packages
 
-```text
-MIT License
+cd fooino/packages && git clone https://github.com/fooino/skeleton.git
 
-Copyright (c) [year] [fullname]
+cd fooino/ && git clone https://github.com/fooino/laravel-fooino-packages-docker.git
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+cd ./fooino/laravel-fooino-packages-docker && docker-compose -p fooino up -d --build
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+docker exec -it fooino-php bash
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+cd ./packages/skeleton
 
+composer update
+
+./vendor/bin/pest
+
+exit
 ```
 
+## 📝 Documentation
 
-<h4>3- src/Providers/SkeletonServiceProvider.php</h4>
-<ol>
-<li>Rename the file to BarServiceProvider.php</li>
-<li>Replace All fooino with foo</li>
-<li>Relpace All Fooino with Foo</li>
-<li>Replace All skeleton with bar</li>
-<li>Replace All Skelton with Bar</li>
-<li>Remove the methods that you do not need</li>
-<li>Modify the methods base on your requirements</li>
-<li>Learn more about methods at <a href="https://laravelpackage.com" target="_blank">laravelpackage.com</a></li>
-</ol>
-
-<h4>3- tests/TestCase.php , tests/Unit/ExampleUnitTest.php , tests/Feature/ExampleFeatureTest.php</h4>
-<ol>
-<li>Relpace All Fooino with Foo</li>
-<li>Replace All Skelton with Bar</li>
-</ol>
-
-<h4>4- README.md</h4>
-<ol>
-<li>Change or Remove the README.md file base on your desire</li>
-</ol>
-
-<hr/>
+1. [Configuration](./docs/markdown/CONFIGURATION.md)
 
 
-### 🚀 Test The files with `vendor/bin/phpunit` command the result must be <span style="background-color:green;">OK (2 tests, 2 assertions)</span></h3>
+## 🚀 Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes.
+
+## ✅ Testing
+
+```bash
+./vendor/bin/pest # or composer pest
+```
+
+## 👨‍💻 Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details to how contribute.
+
+## 🐞 Security
+
+If you've found a bug regarding security please mail [sajadsholidev@gmail.com](mailto:sajadsholidev@gmail.com)
+
+## 🔥 Credits
+
+-   [Sajad Sholi](mailto:sajadsholidev@gmail.com)
+-   [All Contributors](../../contributors)
+
+## ⚖️ License
+
+PRIVATE CODE. Please see [License File](LICENSE.md) for more information.
+
+---
+
+## 🔄 Scaffold a New Package From This Skeleton
+
+Use these instructions to transform this skeleton into a new Laravel package (e.g. `fooino/media`).
+
+### Variables
+
+| Placeholder | Example value (`media`) | Meaning |
+|---|---|---|
+| `{PACKAGE_SLUG}` | `media` | Lowercase kebab slug, used in composer name, config keys, directory paths |
+| `{PACKAGE_NAMESPACE}` | `Media` | PascalCase, used in PHP namespaces and class names |
+| `{PACKAGE_CONSTANT}` | `MEDIA` | UPPER_SNAKE_CASE, used in PHP constants |
+| `{PACKAGE_LOWER}` | `media` | Lowercase, used in translation/view namespaces |
+
+### Step-by-step replacements
+
+Apply these changes **in order**. After each file edit, verify the changes before moving on.
+
+#### 0. Gather info
+
+Ask the user for their new package slug (e.g. `media`). Derive the other three variables from it:
+
+| Derived from `{PACKAGE_SLUG}` | Rule | Example |
+|---|---|---|
+| `{PACKAGE_NAMESPACE}` | `Str::studly(...)` | `media` → `Media` |
+| `{PACKAGE_CONSTANT}` | `Str::upper(Str::snake(...))` | `media` → `MEDIA` |
+| `{PACKAGE_LOWER}` | `Str::lower(...)` | `media` → `media` |
+
+#### 1. `composer.json`
+
+| Replace | With |
+|---|---|
+| `"name": "fooino/skeleton"` | `"name": "fooino/{PACKAGE_SLUG}"` |
+| `"description": "The fooino skeleton package with..."` | `"description": "The fooino {PACKAGE_LOWER} package with..."` |
+| `"skeleton"` in `keywords` array | `"{PACKAGE_SLUG}"` |
+| `"Fooino\\\\Skeleton\\\\": "src/"` | `"Fooino\\\\{PACKAGE_NAMESPACE}\\\\": "src/"` |
+| `"Fooino\\\\Skeleton\\\\Database\\\\": "database/"` | `"Fooino\\\\{PACKAGE_NAMESPACE}\\\\Database\\\\": "database/"` |
+| `"Fooino\\\\Skeleton\\\\Database\\\\Factories\\\\": "database/factories/"` | `"Fooino\\\\{PACKAGE_NAMESPACE}\\\\Database\\\\Factories\\\\": "database/factories/"` |
+| `"Fooino\\\\Skeleton\\\\Tests\\\\": "tests/"` | `"Fooino\\\\{PACKAGE_NAMESPACE}\\\\Tests\\\\": "tests/"` |
+| `"Fooino\\\\Skeleton\\\\Providers\\\\SkeletonServiceProvider"` | `"Fooino\\\\{PACKAGE_NAMESPACE}\\\\Providers\\\\{PACKAGE_NAMESPACE}ServiceProvider"` |
+
+#### 2. Rename file: `src/Providers/SkeletonServiceProvider.php`
+
+Rename to `src/Providers/{PACKAGE_NAMESPACE}ServiceProvider.php`.
+
+#### 3. `src/Providers/{PACKAGE_NAMESPACE}ServiceProvider.php`
+
+| Replace | With |
+|---|---|
+| `namespace Fooino\Skeleton\Providers;` | `namespace Fooino\{PACKAGE_NAMESPACE}\Providers;` |
+| `class SkeletonServiceProvider extends ServiceProvider` | `class {PACKAGE_NAMESPACE}ServiceProvider extends ServiceProvider` |
+| Every `fooino-skeleton-{xxx}` (config, migrations, langs, assets, views, publish-all) | `fooino-{PACKAGE_SLUG}-{xxx}` |
+| Every `lang_path("vendor/fooino/skeleton")` | `lang_path("vendor/fooino/{PACKAGE_SLUG}")` |
+| Every `public_path('vendor/fooino/skeleton')` | `public_path('vendor/fooino/{PACKAGE_SLUG}')` |
+| Every `resource_path("views/vendor/fooino/skeleton")` | `resource_path("views/vendor/fooino/{PACKAGE_SLUG}")` |
+| `SkeletonServiceProvider::class` | `{PACKAGE_NAMESPACE}ServiceProvider::class` |
+| `$this->loadTranslationsFrom(__DIR__ . "/../../lang", 'skeleton');` | `$this->loadTranslationsFrom(__DIR__ . "/../../lang", '{PACKAGE_LOWER}');` |
+| `$this->loadViewsFrom(__DIR__ . "/../../resources/views", 'skeleton');` | `$this->loadViewsFrom(__DIR__ . "/../../resources/views", '{PACKAGE_LOWER}');` |
+| `config('fooino-skeleton.{xxx}')` | `config('fooino-{PACKAGE_SLUG}.{xxx}')` |
+| `SkeletonEventServiceProvider::class` | `{PACKAGE_NAMESPACE}EventServiceProvider::class` |
+| the comment above loadTranslations method `__('skeleton::file.key')` | `__('{PACKAGE_LOWER}::file.key')` |
+| the comment above loadViews method `skeleton:: prefix` | `{PACKAGE_LOWER}:: prefix` |
+
+#### 4. `tests/Unit/ArchitectureUnitTest.php`
+
+| Replace | With |
+|---|---|
+| `namespace Fooino\Skeleton\Tests\Unit;` | `namespace Fooino\{PACKAGE_NAMESPACE}\Tests\Unit;` |
+| Every `'Fooino\Skeleton\*'` (including single backslash `\*` matches) | `'Fooino\{PACKAGE_NAMESPACE}\*'` |
+
+#### 5. `tests/TestCase.php`
+
+| Replace | With |
+|---|---|
+| `namespace Fooino\Skeleton\Tests;` | `namespace Fooino\{PACKAGE_NAMESPACE}\Tests;` |
+| `use Fooino\Skeleton\Providers\SkeletonServiceProvider;` | `use Fooino\{PACKAGE_NAMESPACE}\Providers\{PACKAGE_NAMESPACE}ServiceProvider;` |
+| `SkeletonServiceProvider::class` | `{PACKAGE_NAMESPACE}ServiceProvider::class` |
+
+#### 6. `tests/Pest.php`
+
+| Replace | With |
+|---|---|
+| `pest()->extend(Fooino\Skeleton\Tests\TestCase::class);` | `pest()->extend(Fooino\{PACKAGE_NAMESPACE}\Tests\TestCase::class);` |
+
+#### 7. `src/helpers.php`
+
+| Replace | With |
+|---|---|
+| `FOOINO_SKELETON_CONSTANTS_DEFINED` (both occurrences) | `FOOINO_{PACKAGE_CONSTANT}_CONSTANTS_DEFINED` |
+
+#### 8. `phpunit.xml`
+
+| Replace | With |
+|---|---|
+| `name="Skeleton Package Tests"` | `name="{PACKAGE_NAMESPACE} Package Tests"` |
+
+#### 9. `phpdoc.dist.xml`
+
+| Replace | With |
+|---|---|
+| `<title>Skeleton API Documentation</title>` | `<title>{PACKAGE_NAMESPACE} API Documentation</title>` |
+
+#### 10. `CHANGELOG.md`
+
+| Replace | With |
+|---|---|
+| `fooino/skeleton` | `fooino/{PACKAGE_SLUG}` |
+
+#### 11. `CONTRIBUTING.md`
+
+| Replace | With |
+|---|---|
+| `Fooino Skeleton Package` | `Fooino {PACKAGE_NAMESPACE} Package` |
+
+#### 12. `AGENTS.md`
+
+| Replace | With |
+|---|---|
+| `Fooino Skeleton` (title) | `Fooino {PACKAGE_NAMESPACE}` |
+| `Skeleton foundational library` | `{PACKAGE_NAMESPACE} foundational library` |
+
+#### 13. `README.md` (this file)
+
+| Replace | With |
+|---|---|
+| `Fooino skeleton package` | `Fooino {PACKAGE_LOWER} package` |
+| `composer require fooino/skeleton` | `composer require fooino/{PACKAGE_SLUG}` |
+| `git clone https://github.com/fooino/skeleton.git` | `git clone https://github.com/fooino/{PACKAGE_SLUG}.git` |
+| `cd ./packages/skeleton` | `cd ./packages/{PACKAGE_SLUG}` |
+| Everything from "🔄 Scaffold a New Package..." to end of file | **Delete** (these instructions are only for the scaffolding step itself) |
+
+#### 14. `.github/workflows/main.yml`
+
+| Replace | With |
+|---|---|
+| `Copy docs and README to skeleton directory` | `Copy docs and README to {PACKAGE_SLUG} directory` |
+| `fooino-docs/skeleton` (all occurrences) | `fooino-docs/{PACKAGE_SLUG}` |
+| `git add skeleton/` | `git add {PACKAGE_SLUG}/` |
+| `"Update skeleton docs from fooino/skeleton@..."` | `"Update {PACKAGE_SLUG} docs from fooino/{PACKAGE_SLUG}@..."` |
+
+### Final cleanup
+
+```bash
+# Remove this scaffolding section from README.md
+# (delete everything from "🔄 Scaffold a New Package..." to end of file)
+
+# Regenerate autoloader
+composer dump-autoload
+
+# Run tests to verify
+./vendor/bin/pest
+```

@@ -1,0 +1,74 @@
+name: Tests & Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          tools: composer:v2
+          coverage: xdebug
+          extensions: bcmath, ctype, fileinfo, json, mbstring, pdo, pdo_mysql, tokenizer, xml, curl, openssl, zip, gd, intl
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Tests
+        run: ./vendor/bin/pest --ci --coverage --min=95
+
+  docs:
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+
+      - name: Download phpDocumentor
+        run: |
+          curl -L https://phpdoc.org/phpDocumentor.phar -o phpDocumentor.phar
+          chmod +x phpDocumentor.phar
+
+      - name: Generate docs
+        run: php phpDocumentor.phar
+
+      - name: Checkout fooino-docs
+        uses: actions/checkout@v4
+        with:
+          repository: fooino/fooino-docs
+          path: fooino-docs
+          token: ${{ secrets.DOCS_PAT }}
+
+      - name: Copy docs and README to skeleton directory
+        run: |
+          rm -rf fooino-docs/skeleton
+          mkdir -p fooino-docs/skeleton
+          cp -r docs fooino-docs/skeleton/docs
+          cp README.md fooino-docs/skeleton/README.md
+
+      - name: Commit and push docs
+        run: |
+          cd fooino-docs
+          git config user.name "fooino-bot"
+          git config user.email "bot@fooino.com"
+          git add skeleton/
+          git diff --staged --quiet || git commit -m "Update skeleton docs from fooino/skeleton@${{ github.sha }}"
+          git push

@@ -1,0 +1,7 @@
+<?php
+
+if (!defined('FOOINO_SKELETON_CONSTANTS_DEFINED')) {
+
+
+    define('FOOINO_SKELETON_CONSTANTS_DEFINED', true);
+}

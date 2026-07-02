@@ -14,6 +14,9 @@ class SkeletonServiceProvider extends ServiceProvider
             ->registerResources();
     }
 
+    /**
+     * Register any application services.
+     */
     public function register()
     {
         $this
@@ -24,7 +27,7 @@ class SkeletonServiceProvider extends ServiceProvider
     }
 
 
-    protected function registerPublishes(): self
+    protected function registerPublishes(): static
     {
         $this
             ->publishConfigs()
@@ -37,7 +40,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishConfigs(): self
+    protected function publishConfigs(): static
     {
         // $this->publishes(
         //     [
@@ -49,7 +52,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishMigrations(): self
+    protected function publishMigrations(): static
     {
         // $this->publishes(
         //     [
@@ -61,7 +64,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishLangs(): self
+    protected function publishLangs(): static
     {
         // $this->publishes(
         //     [
@@ -73,7 +76,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishAssets(): self
+    protected function publishAssets(): static
     {
         // $this->publishes(
         //     [
@@ -85,7 +88,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishViews(): self
+    protected function publishViews(): static
     {
         // $this->publishes(
         //     [
@@ -97,7 +100,7 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function publishAll(): self
+    protected function publishAll(): static
     {
         // $this->publishes(self::$publishes[SkeletonServiceProvider::class], 'fooino-skeleton-publish-all');
 
@@ -105,7 +108,7 @@ class SkeletonServiceProvider extends ServiceProvider
     }
 
 
-    protected function registerResources(): self
+    protected function registerResources(): static
     {
         $this
             ->registerMigrations()
@@ -118,19 +121,19 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerMigrations(): self
+    protected function registerMigrations(): static
     {
         // $this->loadMigrationsFrom(__DIR__ . "/../../database/migrations");
         return $this;
     }
 
-    protected function registerTranslations(): self
+    protected function registerTranslations(): static
     {
         // $this->loadTranslationsFrom(__DIR__ . "/../../lang", 'skeleton');
         return $this;
     }
 
-    protected function registerConfigs(): self
+    protected function registerConfigs(): static
     {
         // // for testing purposes or if the user did not publish the config file
         // foreach (['fooino-skeleton'] as $config) {
@@ -142,13 +145,13 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerViews(): self
+    protected function registerViews(): static
     {
         // $this->loadViewsFrom(__DIR__ . "/../../resources/views", 'skeleton');
         return $this;
     }
 
-    protected function registerApiRoutes(): self
+    protected function registerApiRoutes(): static
     {
         // Route::group($this->apiRouteConfiguration(), function () {
         //     $this->loadRoutesFrom(__DIR__ . "/../../routes/api.php");
@@ -157,43 +160,39 @@ class SkeletonServiceProvider extends ServiceProvider
     }
 
 
-    protected function apiRouteConfiguration(): array
-    {
-        return [
-            // 'domain'        => config('fooino-skeleton.domain', null),
-            // 'namespace'     => null,
-            // 'prefix'        => config('fooino-skeleton.api_path', 'api'),
-            // 'as'            => 'api.',
-            // 'middleware'    => config('fooino-skeleton.apiMiddlewares.group', 'api'),
-        ];
-    }
+    // protected function apiRouteConfiguration(): array
+    // {
+    //     return [
+    //         'domain'        => config('fooino-skeleton.domain', null),
+    //         'namespace'     => null,
+    //         'prefix'        => config('fooino-skeleton.api_path', 'api'),
+    //         'as'            => 'api.',
+    //         'middleware'    => config('fooino-skeleton.apiMiddlewares.group', 'api'),
+    //     ];
+    // }
 
-    
-    protected function loadProviders(): self
+
+    protected function loadProviders(): static
     {
         // $this->app->register(SkeletonEventServiceProvider::class);
         return $this;
     }
 
-    protected function registerSingletons(): self
+    protected function registerSingletons(): static
     {
-        // $this->app->singleton('your-abstract-class-name', function ($app) {
-        //     return new YourFacadeConcreteClass();
-        // });
+        // $this->app->singleton(abstract: 'Your-abstract-name', concrete: fn(Application $app) => new YourConcreteClass($app));
 
         return $this;
     }
 
-    protected function registerBinds(): self
+    protected function registerBinds(): static
     {
-        // $this->app->bind('your-abstract-class-name', function ($app) {
-        //     return new YourFacadeConcreteClass();
-        // });
+        // $this->app->bind(abstract: 'Your-abstract-name', concrete: fn(Application $app) => new YourConcreteClass($app));
 
         return $this;
     }
 
-    protected function loadCommands(): self
+    protected function loadCommands(): static
     {
         // $this->commands([
         //     YourCommandClass::class,

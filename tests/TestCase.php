@@ -2,30 +2,16 @@
 
 namespace Fooino\Skeleton\Tests;
 
-use Orchestra\Testbench\TestCase as TestbenchTestCase;
+use Fooino\Core\Providers\CoreServiceProvider;
+use Fooino\Skeleton\Providers\SkeletonServiceProvider;
 
-class TestCase extends TestbenchTestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // Config::set(['skeleton_package_env' => 'testing']);
-    }
-
     protected function getPackageProviders($app)
     {
         return [
-            // CoreServiceProvider::class,
+            CoreServiceProvider::class,
+            SkeletonServiceProvider::class,
         ];
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver'    => 'sqlite',
-            'database'  => ':memory:'
-        ]);
     }
 }

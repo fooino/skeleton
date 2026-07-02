@@ -7,39 +7,49 @@ use Illuminate\Support\ServiceProvider;
 class SkeletonServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    /**
+     * Perform post-registration booting of all package services
+     */
+    public function boot(): void
     {
         $this
-            ->registerPublishes()
-            ->registerResources();
+            ->bootPublishes()
+            ->bootResources();
     }
 
     /**
-     * Register any application services.
+     * Register any application services within the container
      */
-    public function register()
+    public function register(): void
     {
         $this
-            ->loadProviders()
+            ->loadConfigs()
             ->registerSingletons()
             ->registerBinds()
-            ->loadCommands();
+            ->loadCommands()
+            ->loadProviders();
     }
 
 
-    protected function registerPublishes(): static
+    /**
+     * Register all publishable assets so consumers can vendor:publish them
+     */
+    protected function bootPublishes(): static
     {
         $this
             ->publishConfigs()
             ->publishMigrations()
-            ->publishAssets()
             ->publishLangs()
+            ->publishAssets()
             ->publishViews()
             ->publishAll();
 
         return $this;
     }
 
+    /**
+     * Expose the configuration file for end-user customisation
+     */
     protected function publishConfigs(): static
     {
         // $this->publishes(
@@ -52,6 +62,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Expose migration files so consumers can copy and modify them
+     */
     protected function publishMigrations(): static
     {
         // $this->publishes(
@@ -64,6 +77,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Expose language files for end-user translation overrides
+     */
     protected function publishLangs(): static
     {
         // $this->publishes(
@@ -76,6 +92,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Expose public assets (images, JS, CSS) for direct browser access
+     */
     protected function publishAssets(): static
     {
         // $this->publishes(
@@ -88,6 +107,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Expose view templates so consumers can override them in their own app
+     */
     protected function publishViews(): static
     {
         // $this->publishes(
@@ -100,6 +122,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Register a single publish-all tag so consumers can publish everything at once
+     */
     protected function publishAll(): static
     {
         // $this->publishes(self::$publishes[SkeletonServiceProvider::class], 'fooino-skeleton-publish-all');
@@ -108,50 +133,51 @@ class SkeletonServiceProvider extends ServiceProvider
     }
 
 
-    protected function registerResources(): static
+    /**
+     * Load all runtime resources (migrations, translations, views, routes) during boot
+     */
+    protected function bootResources(): static
     {
         $this
-            ->registerMigrations()
-            ->registerTranslations()
-            ->registerConfigs()
-            ->registerViews()
-            ->registerApiRoutes();
-
+            ->loadMigrations()
+            ->loadTranslations()
+            ->loadViews()
+            ->loadApiRoutes();
 
         return $this;
     }
 
-    protected function registerMigrations(): static
+    /**
+     * Register migration paths so Laravel discovers package migrations automatically
+     */
+    protected function loadMigrations(): static
     {
         // $this->loadMigrationsFrom(__DIR__ . "/../../database/migrations");
         return $this;
     }
 
-    protected function registerTranslations(): static
+    /**
+     * Register the translation namespace so consumers can use __('skeleton::file.key')
+     */
+    protected function loadTranslations(): static
     {
         // $this->loadTranslationsFrom(__DIR__ . "/../../lang", 'skeleton');
         return $this;
     }
 
-    protected function registerConfigs(): static
-    {
-        // // for testing purposes or if the user did not publish the config file
-        // foreach (['fooino-skeleton'] as $config) {
-
-        //     if (blank(config($config))) {
-        //         $this->mergeConfigFrom(__DIR__ . "/../../config/{$config}.php", $config);
-        //     }
-        // }
-        return $this;
-    }
-
-    protected function registerViews(): static
+    /**
+     * Register the view namespace so consumers can render package views with skeleton:: prefix
+     */
+    protected function loadViews(): static
     {
         // $this->loadViewsFrom(__DIR__ . "/../../resources/views", 'skeleton');
         return $this;
     }
 
-    protected function registerApiRoutes(): static
+    /**
+     * Load API route definitions under a grouped middleware and prefix configuration
+     */
+    protected function loadApiRoutes(): static
     {
         // Route::group($this->apiRouteConfiguration(), function () {
         //     $this->loadRoutesFrom(__DIR__ . "/../../routes/api.php");
@@ -159,7 +185,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
-
+    /**
+     * Provide standard route-group defaults (domain, prefix, middleware) for all package API routes
+     */
     // protected function apiRouteConfiguration(): array
     // {
     //     return [
@@ -172,12 +200,25 @@ class SkeletonServiceProvider extends ServiceProvider
     // }
 
 
-    protected function loadProviders(): static
+    /**
+     * Merge default configuration so values are available via config() even before publish
+     */
+    protected function loadConfigs(): static
     {
-        // $this->app->register(SkeletonEventServiceProvider::class);
+        // // for testing purposes or if the user did not publish the config file
+        // foreach (['fooino-skeleton'] as $config) {
+
+        //     if (blank(config($config))) {
+        //         $this->mergeConfigFrom(__DIR__ . "/../../config/{$config}.php", $config);
+        //     }
+        // }
+
         return $this;
     }
 
+    /**
+     * Register services that should have exactly one instance per application lifecycle
+     */
     protected function registerSingletons(): static
     {
         // $this->app->singleton(abstract: 'Your-abstract-name', concrete: fn(Application $app) => new YourConcreteClass($app));
@@ -185,6 +226,9 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Register services that need a new instance every time they are resolved
+     */
     protected function registerBinds(): static
     {
         // $this->app->bind(abstract: 'Your-abstract-name', concrete: fn(Application $app) => new YourConcreteClass($app));
@@ -192,11 +236,24 @@ class SkeletonServiceProvider extends ServiceProvider
         return $this;
     }
 
+    /**
+     * Register Artisan commands so they are available via the CLI
+     */
     protected function loadCommands(): static
     {
         // $this->commands([
         //     YourCommandClass::class,
         // ]);
+
+        return $this;
+    }
+
+    /**
+     * Register child service providers so they participate in the full Laravel boot cycle
+     */
+    protected function loadProviders(): static
+    {
+        // $this->app->register(SkeletonEventServiceProvider::class);
 
         return $this;
     }

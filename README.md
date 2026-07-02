@@ -125,6 +125,8 @@ Rename to `src/Providers/{PACKAGE_NAMESPACE}ServiceProvider.php`.
 | `$this->loadViewsFrom(__DIR__ . "/../../resources/views", 'skeleton');` | `$this->loadViewsFrom(__DIR__ . "/../../resources/views", '{PACKAGE_LOWER}');` |
 | `config('fooino-skeleton.{xxx}')` | `config('fooino-{PACKAGE_SLUG}.{xxx}')` |
 | `SkeletonEventServiceProvider::class` | `{PACKAGE_NAMESPACE}EventServiceProvider::class` |
+| the comment above loadTranslations method `__('skeleton::file.key')` | `__('{PACKAGE_LOWER}::file.key')` |
+| the comment above loadViews method `skeleton:: prefix` | `{PACKAGE_LOWER}:: prefix` |
 
 #### 4. `tests/Unit/ArchitectureUnitTest.php`
 

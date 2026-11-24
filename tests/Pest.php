@@ -1,5 +1,7 @@
 <?php
 
+use Fooino\Skeleton\Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,7 +13,7 @@
 |
 */
 
-pest()->extend(Fooino\Skeleton\Tests\TestCase::class);
+pest()->extend(TestCase::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +41,7 @@ pest()->extend(Fooino\Skeleton\Tests\TestCase::class);
 |
 */
 
-function something()
-{
-    // ..
-}
+// function something()
+// {
+//     // ..
+// }

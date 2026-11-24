@@ -51,5 +51,6 @@ describe('Arch tests', function () {
 
     // arch('Documented')
     //     ->expect('Fooino\Skeleton')
-    //     ->toHaveMethodsDocumented();
+    //     ->toHaveMethodsDocumented()
+    //     ->ignoring('Fooino\Skeleton\Models');
 });

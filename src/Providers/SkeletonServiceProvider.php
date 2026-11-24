@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class SkeletonServiceProvider extends ServiceProvider
 {
-
     /**
      * Perform post-registration booting of all package services
      */
@@ -30,7 +29,6 @@ class SkeletonServiceProvider extends ServiceProvider
             ->loadProviders();
     }
 
-
     /**
      * Register all publishable assets so consumers can vendor:publish them
      */
@@ -53,10 +51,10 @@ class SkeletonServiceProvider extends ServiceProvider
     protected function publishConfigs(): static
     {
         // $this->publishes(
-        //     [
-        //         __DIR__ . "/../../config/fooino-skeleton.php"                     => config_path('fooino-skeleton.php'),
+        //     paths: [
+        //         __DIR__ . '/../../config/fooino-skeleton.php' => config_path('fooino-skeleton.php')
         //     ],
-        //     'fooino-skeleton-config'
+        //     groups: 'fooino-skeleton-configs'
         // );
 
         return $this;
@@ -68,10 +66,10 @@ class SkeletonServiceProvider extends ServiceProvider
     protected function publishMigrations(): static
     {
         // $this->publishes(
-        //     [
-        //         __DIR__ . "/../../database/migrations/2000_00_00_000000_create_foobar_table.php"                             => database_path('migrations/2000_00_00_000000_create_foobar_table.php'),
+        //     paths: [
+        //         __DIR__ . '/../../database/migrations/2000_00_00_000000_create_foobar_table.php' => database_path('migrations/2000_00_00_000000_create_foobar_table.php')
         //     ],
-        //     'fooino-skeleton-migrations'
+        //     groups: 'fooino-skeleton-migrations'
         // );
 
         return $this;
@@ -83,10 +81,10 @@ class SkeletonServiceProvider extends ServiceProvider
     protected function publishLangs(): static
     {
         // $this->publishes(
-        //     [
-        //         __DIR__ . "/../../lang" => lang_path("vendor/fooino/skeleton")
+        //     paths: [
+        //         __DIR__ . '/../../lang' => lang_path('vendor/fooino/skeleton')
         //     ],
-        //     'fooino-skeleton-langs'
+        //     groups: 'fooino-skeleton-langs'
         // );
 
         return $this;
@@ -98,10 +96,10 @@ class SkeletonServiceProvider extends ServiceProvider
     protected function publishAssets(): static
     {
         // $this->publishes(
-        //     [
-        //         __DIR__ . "/../../assets/" => public_path('vendor/fooino/skeleton')
+        //     paths: [
+        //         __DIR__ . '/../../assets/' => public_path('vendor/fooino/skeleton')
         //     ],
-        //     'fooino-skeleton-assets'
+        //     groups: 'fooino-skeleton-assets'
         // );
 
         return $this;
@@ -113,10 +111,10 @@ class SkeletonServiceProvider extends ServiceProvider
     protected function publishViews(): static
     {
         // $this->publishes(
-        //     [
-        //         __DIR__ . "/../../views" => resource_path("views/vendor/fooino/skeleton")
+        //     paths: [
+        //         __DIR__ . '/../../resources/views' => resource_path('views/vendor/fooino/skeleton')
         //     ],
-        //     'fooino-skeleton-views'
+        //     groups: 'fooino-skeleton-views'
         // );
 
         return $this;
@@ -127,11 +125,10 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function publishAll(): static
     {
-        // $this->publishes(self::$publishes[SkeletonServiceProvider::class], 'fooino-skeleton-publish-all');
+        // $this->publishes(paths: self::$publishes[SkeletonServiceProvider::class], groups: 'fooino-skeleton-publish-all');
 
         return $this;
     }
-
 
     /**
      * Load all runtime resources (migrations, translations, views, routes) during boot
@@ -141,8 +138,7 @@ class SkeletonServiceProvider extends ServiceProvider
         $this
             ->loadMigrations()
             ->loadTranslations()
-            ->loadViews()
-            ->loadApiRoutes();
+            ->loadViews();
 
         return $this;
     }
@@ -152,7 +148,8 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function loadMigrations(): static
     {
-        // $this->loadMigrationsFrom(__DIR__ . "/../../database/migrations");
+        // $this->loadMigrationsFrom(paths: __DIR__ . '/../../database/migrations');
+
         return $this;
     }
 
@@ -161,7 +158,8 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function loadTranslations(): static
     {
-        // $this->loadTranslationsFrom(__DIR__ . "/../../lang", 'skeleton');
+        // $this->loadTranslationsFrom(path: __DIR__ . '/../../lang', namespace: 'skeleton');
+
         return $this;
     }
 
@@ -170,48 +168,17 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function loadViews(): static
     {
-        // $this->loadViewsFrom(__DIR__ . "/../../resources/views", 'skeleton');
+        // $this->loadViewsFrom(path: __DIR__ . '/../../resources/views', namespace: 'skeleton');
+
         return $this;
     }
-
-    /**
-     * Load API route definitions under a grouped middleware and prefix configuration
-     */
-    protected function loadApiRoutes(): static
-    {
-        // Route::group($this->apiRouteConfiguration(), function () {
-        //     $this->loadRoutesFrom(__DIR__ . "/../../routes/api.php");
-        // });
-        return $this;
-    }
-
-    /**
-     * Provide standard route-group defaults (domain, prefix, middleware) for all package API routes
-     */
-    // protected function apiRouteConfiguration(): array
-    // {
-    //     return [
-    //         'domain'        => config('fooino-skeleton.domain', null),
-    //         'namespace'     => null,
-    //         'prefix'        => config('fooino-skeleton.api_path', 'api'),
-    //         'as'            => 'api.',
-    //         'middleware'    => config('fooino-skeleton.apiMiddlewares.group', 'api'),
-    //     ];
-    // }
-
 
     /**
      * Merge default configuration so values are available via config() even before publish
      */
     protected function loadConfigs(): static
     {
-        // // for testing purposes or if the user did not publish the config file
-        // foreach (['fooino-skeleton'] as $config) {
-
-        //     if (blank(config($config))) {
-        //         $this->mergeConfigFrom(__DIR__ . "/../../config/{$config}.php", $config);
-        //     }
-        // }
+        // $this->mergeConfigFrom(path: __DIR__ . '/../../config/fooino-skeleton.php', key: 'fooino-skeleton');
 
         return $this;
     }
@@ -241,8 +208,8 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function loadCommands(): static
     {
-        // $this->commands([
-        //     YourCommandClass::class,
+        // $this->commands(commands: [
+        //     YourCommandClass::class
         // ]);
 
         return $this;
@@ -253,7 +220,7 @@ class SkeletonServiceProvider extends ServiceProvider
      */
     protected function loadProviders(): static
     {
-        // $this->app->register(SkeletonEventServiceProvider::class);
+        // $this->app->register(provider: SkeletonEventServiceProvider::class);
 
         return $this;
     }

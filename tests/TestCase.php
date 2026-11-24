@@ -7,7 +7,10 @@ use Fooino\Skeleton\Providers\SkeletonServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    protected function getPackageProviders($app)
+    /**
+     * Register the package providers for the test application
+     */
+    protected function getPackageProviders(mixed $app): array
     {
         return [
             CoreServiceProvider::class,
